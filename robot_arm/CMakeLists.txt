@@ -2,12 +2,16 @@ cmake_minimum_required(VERSION 2.8.3)
 project(robot_arm)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+	std_msgs
+	message_generation
+	controller_manager
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -49,12 +53,11 @@ find_package(catkin REQUIRED)
 #   Message2.msg
 # )
 
-## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+### Generate services in the 'srv' folder
+add_service_files(
+   FILES
+   GoToPosition.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -64,10 +67,10 @@ find_package(catkin REQUIRED)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -193,3 +196,8 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+include_directories(include ${catkin_INCLUDE_DIRS})
+
+add_executable(arm_mover src/arm_mover.cpp)
+target_link_libraries(arm_mover ${catkin_LIBRARIES})
+add_dependencies(arm_mover simple_arm_generate_messages_cpp)

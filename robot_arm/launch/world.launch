@@ -11,7 +11,7 @@
 
   <!-- Launch other relevant files-->
   <include file="$(find robot_arm)/launch/robot_description.launch"/>
-
+  <include file="$(find robot_arm)/launch/robot_control.xml"/>
   <!-- World File -->
   <arg name="world_file" default="$(find robot_arm)/worlds/empty.world"/>
 
@@ -31,4 +31,21 @@
         args="-urdf -param robot_description -model robot_arm 
               -x $(arg x) -y $(arg y) -z $(arg z)
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <!-- The arm mover node -->
+  <node name="arm_mover" type="arm_mover" pkg="robot_arm" output="screen">
+    <rosparam>
+      min_joint_1_angle: 0
+      max_joint_1_angle: 1.57
+      min_joint_2_angle: 0
+      max_joint_2_angle: 1.0
+      min_joint_3_angle: 0
+      max_joint_3_angle: 1.0
+      min_joint_4_angle: 0
+      max_joint_4_angle: 1.0
+      min_joint_5_angle: 0
+      max_joint_5_angle: 1.0      
+    </rosparam>
+  </node>        
+        
 </launch>

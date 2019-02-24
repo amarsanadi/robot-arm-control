@@ -7,7 +7,12 @@
   <xacro:property name="PI" value="3.14159"/>
   <xacro:property name="mass1" value="50" />
   <xacro:property name="mass2" value="10" />
-  <xacro:property name="mass3" value="5" />
+  <xacro:property name="mass3" value="2.5" />
+  <xacro:property name="mass4" value="2.5" />
+  <xacro:property name="mass5" value="2.5" />
+  <xacro:property name="mass6" value="2.5" />
+  <xacro:property name="mass7" value="2.5" />
+
   <xacro:property name="base_length" value="0.2" />
   <xacro:property name="base_radius" value="0.3" />
   
@@ -20,6 +25,17 @@
   <xacro:property name="link3_length" value="0.1" />
   <xacro:property name="link3_radius" value="0.05" />
 
+  <xacro:property name="link4_length" value="0.1" />
+  <xacro:property name="link4_radius" value="0.05" />
+
+ <xacro:property name="link5_length" value="0.3" />
+ <xacro:property name="link5_width" value="0.03" />
+
+ <xacro:property name="link6_length" value="0.3" />
+ <xacro:property name="link6_width" value="0.03" />
+
+  <!--Import gazebo elements-->
+  <xacro:include filename="$(find robot_arm)/urdf/robot_arm.gazebo.xacro" />
 
   <link name="robot_footprint"></link>
 
@@ -81,7 +97,7 @@
     </inertial>
   </link>
 
-  <joint name="joint_1" type="continuous">
+  <joint name="joint_0" type="continuous">
     <parent link="base_link"/>
     <child link="link_1"/>
     <axis xyz="0 0 1"/>
@@ -111,13 +127,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="${mass3}"/>
       <inertia
-        ixx="${mass2 / 12.0 * (link2_width*link2_width + link2_length*link2_length)}" ixy="0.0" ixz="0.0"
-        iyy="${mass2 / 12.0 * (link2_width*link2_width + link2_width*link2_width)}" iyz="0.0"
-        izz="${mass2 / 12.0 * (link2_length*link2_length + link2_width*link2_width)}"/>
+        ixx="${mass3 / 12.0 * (link2_width*link2_width + link2_length*link2_length)}" ixy="0.0" ixz="0.0"
+        iyy="${mass3 / 12.0 * (link2_width*link2_width + link2_width*link2_width)}" iyz="0.0"
+        izz="${mass3 / 12.0 * (link2_length*link2_length + link2_width*link2_width)}"/>
     </inertial>
   </link>
 
-  <joint name="joint_2" type="continuous">
+  <joint name="joint_1" type="continuous">
     <parent link="link_1"/>
     <child link="link_2"/>
     <axis xyz="0 0 1"/>
@@ -144,15 +160,15 @@
     </collision>
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="${mass3}"/>
+      <mass value="${mass4}"/>
       <inertia
-        ixx="${mass3 / 12.0 * (2*link3_radius*2*link3_radius + link3_length*link3_length)}" ixy="0.0" ixz="0.0"
-        iyy="${mass3 / 12.0 * (link3_length*link3_length + 2*link3_radius*2*link3_radius)}" iyz="0.0"
-        izz="${mass3 / 12.0 * (2*link3_radius*2*link3_radius + 2*link3_radius*2*link3_radius)}"/>
+        ixx="${mass4 / 12.0 * (2*link3_radius*2*link3_radius + link3_length*link3_length)}" ixy="0.0" ixz="0.0"
+        iyy="${mass4 / 12.0 * (link3_length*link3_length + 2*link3_radius*2*link3_radius)}" iyz="0.0"
+        izz="${mass4 / 12.0 * (2*link3_radius*2*link3_radius + 2*link3_radius*2*link3_radius)}"/>
     </inertial>
   </link>
 
-  <joint name="joint_3" type="continuous">
+  <joint name="joint_2" type="continuous">
     <parent link="link_2"/>
     <child link="link_3"/>
     <axis xyz="0 1 0"/>
@@ -160,6 +176,172 @@
     <limit effort="30" velocity="1.0"/>
     <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
+
+  <link name="link_4">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="${link4_length}" radius="${link4_radius}"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="${link4_length}" radius="${link4_radius}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${mass4}"/>
+      <inertia
+        ixx="${mass4 / 12.0 * (2*link4_radius*2*link4_radius + link4_length*link4_length)}" ixy="0.0" ixz="0.0"
+        iyy="${mass4 / 12.0 * (link4_length*link4_length + 2*link4_radius*2*link4_radius)}" iyz="0.0"
+        izz="${mass4 / 12.0 * (2*link4_radius*2*link4_radius + 2*link4_radius*2*link4_radius)}"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_3" type="continuous">
+    <parent link="link_3"/>
+    <child link="link_4"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0 0 -${link4_length}" rpy="0 0 0"/>
+    <limit effort="30" velocity="1.0"/>
+    <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
+  </joint>
+
+  <link name="link_5">
+    <visual>
+      <origin xyz="0 0 -${link5_length/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${link5_width} ${link5_width} ${link5_length}"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -${link5_length/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${link5_width} ${link5_width} ${link5_length}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${mass6}"/>
+      <inertia
+        ixx="${mass6 / 12.0 * (link5_width*link5_width + link5_length*link5_length)}" ixy="0.0" ixz="0.0"
+        iyy="${mass6 / 12.0 * (link5_length*link5_length + link5_width*link5_width)}" iyz="0.0"
+        izz="${mass6 / 12.0 * (link5_width*link5_width + link5_width*link5_width)}"/>
+    </inertial>
+  </link>
+
+
+  <joint name="joint_4" type="continuous">
+    <parent link="link_4"/>
+    <child link="link_5"/>
+    <axis xyz="1 0 0"/>
+    <origin xyz="${link4_radius+link5_width/2} 0 -${link4_length/6}" rpy="0 0 0"/>
+    <limit effort="30" velocity="1.0"/>
+    <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
+  </joint>
+
+ <link name="link_6">
+    <visual>
+      <origin xyz="0 0 -${link6_length/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${link6_width} ${link6_width} ${link6_length}"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -${link6_length/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${link6_width} ${link6_width} ${link6_length}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 ${link6_length/2}" rpy="0 0 0"/>
+      <mass value="${mass7}"/>
+      <inertia
+        ixx="${mass7 / 12.0 * (link6_width*link6_width + link6_length*link6_length)}" ixy="0.0" ixz="0.0"
+        iyy="${mass7 / 12.0 * (link6_length*link6_length + link6_width*link6_width)}" iyz="0.0"
+        izz="${mass7 / 12.0 * (link6_width*link6_width + link6_width*link6_width)}"/>
+    </inertial>
+  </link>
+
+
+  <joint name="joint_5" type="continuous">
+    <parent link="link_5"/>
+    <child link="link_6"/>
+    <axis xyz="1 0 0"/>
+    <origin xyz="-${link5_width/2+link6_width/2} 0 -${link6_length-link6_width/2}" rpy="0 0 0"/>
+    <limit effort="30" velocity="1.0"/>
+    <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
+  </joint>
+
+  <!--Transmission and actuators-->
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_5">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
 
 </robot>

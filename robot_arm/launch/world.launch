@@ -35,16 +35,16 @@
   <!-- The arm mover node -->
   <node name="arm_mover" type="arm_mover" pkg="robot_arm" output="screen">
     <rosparam>
-      min_joint_1_angle: 0
-      max_joint_1_angle: 1.57
-      min_joint_2_angle: 0
-      max_joint_2_angle: 1.0
-      min_joint_3_angle: 0
-      max_joint_3_angle: 1.0
-      min_joint_4_angle: 0
-      max_joint_4_angle: 1.0
-      min_joint_5_angle: 0
-      max_joint_5_angle: 1.0      
+      min_joint_1_angle: -6.28
+      max_joint_1_angle: 6.28
+      min_joint_2_angle: -6.28
+      max_joint_2_angle: 6.28
+      min_joint_3_angle: -3.141
+      max_joint_3_angle: 3.141
+      min_joint_4_angle: -3.141
+      max_joint_4_angle: 3.151
+      min_joint_5_angle: -3.141
+      max_joint_5_angle: 3.141   
     </rosparam>
   </node>        
         

@@ -97,13 +97,11 @@
     </inertial>
   </link>
 
-  <joint name="joint_0" type="continuous">
+  <joint name="joint_0" type="fixed">
     <parent link="base_link"/>
     <child link="link_1"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 ${base_length}" rpy="0 0 0"/>
-    <limit effort="30" velocity="1.0"/>
-    <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
 
 
@@ -138,7 +136,7 @@
     <child link="link_2"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 ${link1_length+link2_width/2}" rpy="0 0 0"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="60" velocity="2.0"/>
     <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
 
@@ -173,7 +171,7 @@
     <child link="link_3"/>
     <axis xyz="0 1 0"/>
     <origin xyz="0 ${link2_length/2+link3_radius} 0" rpy="0 0 0"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="60" velocity="2.0"/>
     <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
 
@@ -208,7 +206,7 @@
     <child link="link_4"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 -${link4_length}" rpy="0 0 0"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="60" velocity="2.0"/>
     <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
 
@@ -244,7 +242,7 @@
     <child link="link_5"/>
     <axis xyz="1 0 0"/>
     <origin xyz="${link4_radius+link5_width/2} 0 -${link4_length/6}" rpy="0 0 0"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="60" velocity="2.0"/>
     <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
 
@@ -280,7 +278,7 @@
     <child link="link_6"/>
     <axis xyz="1 0 0"/>
     <origin xyz="-${link5_width/2+link6_width/2} 0 -${link6_length-link6_width/2}" rpy="0 0 0"/>
-    <limit effort="30" velocity="1.0"/>
+    <limit effort="60" velocity="2.0"/>
     <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.0" soft_upper_limit="0.5" />
   </joint>
 
